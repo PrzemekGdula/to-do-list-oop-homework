@@ -22,8 +22,10 @@ class ToDo {
             li.innerText = task.text
             button.innerText = 'Delete task'
 
-            li.addEventListener('click', (e) => this.taskClickHandler(task))
+            li.addEventListener('click', (e) => this.toggleComplete(task, li))
             button.addEventListener('click', (e) => this.taskDeleteClickHandler(e, taskIndex))
+
+            this.style(task, li)
 
             li.appendChild(button)
             ul.appendChild(li)
@@ -52,7 +54,19 @@ class ToDo {
         document.body.appendChild(inputAddTask)
         document.body.appendChild(buttonAddTask)
     }
+
+    toggleComplete(task) {
+        task.completed ? (task.completed = false) : (task.completed = true)
+
+        this.render()
+    }
+
+    style(task, taskBox) {
+        task.completed ? (taskBox.style.textDecoration = "line-through") : (taskBox.style.textDecoration = "none")
+        
+    }
 }
+
 
 class Task {
     constructor(text) {
